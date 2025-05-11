@@ -1,39 +1,35 @@
 import Layout from "../Layout";
 
 export default function Boardgames() {
-  console.log("ce faci?");
   return (
-    <div>
-      <div>
-        <ul>
-          <li>mere,pere</li>
-        </ul>
-      </div>
-
-      <h1>hwllo</h1>
-      {/* <div className="boardgames">
+    <div className="boardgames">
+      <img
+        src="images/10069030-removebg-preview.png"
+        style={{
+          width: "400px",
+          height: "auto",
+          marginTop: "80px",
+          marginBottom: "20px",
+          marginRight: "auto",
+          marginLeft: "20px",
+        }}
+      />
+      {/* <div>
         <img
-          src="images/board-games-logo-colour-cmyk-1687979724.png"
+          src="images/singleplayer-removebg-preview.png"
           style={{
-            width: "500px",
+            width: "20px",
             height: "auto",
-            marginTop: "80px",
-            marginBottom: "20px",
+            marginTop: "20px",
+            marginBottom: "10px",
           }}
         />
-        <div>
-          <img
-            src="images/singleplayer-removebg-preview.png"
-            style={{
-              width: "20px",
-              height: "auto",
-              marginTop: "20px",
-              marginBottom: "10px",
-            }}
-          />
+      </div>
+      <div>
+        <ul>
           <li>Single player</li>
           <li>Multiplayer</li>
-        </div>
+        </ul>
       </div> */}
     </div>
   );

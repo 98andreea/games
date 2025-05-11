@@ -9,8 +9,6 @@ export default function Layout() {
     setsettingsIsOpen(!settingsIsOpen);
   };
 
-  console.log("Ce faci?");
-
   return (
     <div>
       {/* <h1 className="text-2xl font-bold mb-4">

@@ -13,16 +13,15 @@ import Settings from "./pages/Settings";
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <BrowserRouter>
+      <Layout />
+
       <Routes>
-        <Route path="/" element={<Layout />}>
-          <Route index element={<App />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/boardgames" element={<Boardgames />} />
-          <Route path="/consola" element={<Consola />} />
-          <Route path="/pcgames" element={<PCGames />} />
-          <Route path="/settings" element={<Settings />} />
-        </Route>
+        <Route path="/about" element={<About />} />
+        <Route path="/boardgames" element={<Boardgames />} />
+        <Route path="/consola" element={<Consola />} />
+        <Route path="/pcgames" element={<PCGames />} />
       </Routes>
+      {/* </Layout> */}
     </BrowserRouter>
   </React.StrictMode>
 );

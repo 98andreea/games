@@ -1,0 +1,2 @@
+(self.__LOADABLE_LOADED_CHUNKS__=self.__LOADABLE_LOADED_CHUNKS__||[]).push([[22495],{638894:(_,r,e)=>{var l="";_.exports={locale:"ro-RO",i18nStrings:void 0,plural:e(193655)}},193655:_=>{_.exports=function(_){return 1==+_?0:0==_||_%100>0&&_%100<20?1:2}}}]);
+//# sourceMappingURL=https://sm.pinimg.com/webapp/locale-ro_RO-data-js-948b9ef4b34dabaa.mjs.map
