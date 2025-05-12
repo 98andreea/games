@@ -171,6 +171,7 @@ export default function Layout() {
                       to="/settings" // Redirecționează la pagina de setări
                       className="block px-4 py-2 text-sm text-gray-700 font-bold"
                       id="settings-menu-button"
+                      onClick={() => settingsIsOpen(false)}
                     >
                       <span className="absolute -inset-1.5"></span>
                       <span className="sr-only">Open settings menu</span>
@@ -213,7 +214,6 @@ export default function Layout() {
             >
               About
             </NavLink>
-
             <NavLink
               to="/boardgames"
               className={({ isActive }) =>
@@ -224,7 +224,6 @@ export default function Layout() {
             >
               Boardgames
             </NavLink>
-
             <NavLink
               to="/consola"
               className={({ isActive }) =>
@@ -235,7 +234,6 @@ export default function Layout() {
             >
               Consola
             </NavLink>
-
             <NavLink
               to="/pcgames"
               className={({ isActive }) =>

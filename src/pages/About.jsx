@@ -30,6 +30,8 @@ export default function About() {
           fontSize: "20px",
           color: "#000",
           marginBottom: "40px",
+          textAlign: "center", // Aliniere centru pentru text
+          marginTop: "20px", // Distanță față de imagini
         }}
       >
         Descoperă jocuri care se potrivesc fie pentru o seară relaxantă singur,
