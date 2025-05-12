@@ -167,15 +167,15 @@ export default function Layout() {
                     tabIndex="-1"
                   >
                     {/* <!-- Active: "bg-gray-100 outline-hidden", Not Active: "" --> */}
-                    <a
-                      href="#"
-                      className="block px-4 py-2 text-sm text-gray-700 text-center font-bold"
-                      role="menuitem"
-                      tabIndex="-1"
-                      id="user-menu-item-0"
+                    <Link
+                      to="/settings" // Redirecționează la pagina de setări
+                      className="block px-4 py-2 text-sm text-gray-700 font-bold"
+                      id="settings-menu-button"
                     >
+                      <span className="absolute -inset-1.5"></span>
+                      <span className="sr-only">Open settings menu</span>
                       Settings
-                    </a>
+                    </Link>
                     <a
                       href="#"
                       className="block px-4 py-2 text-sm text-gray-700"

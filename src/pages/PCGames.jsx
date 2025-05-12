@@ -9,7 +9,7 @@ export default function PCGames() {
           marginTop: "100px",
           marginBottom: "20px",
           marginRight: "auto",
-          marginLeft: "60px",
+          marginLeft: "6S0px",
         }}
       />
     </div>

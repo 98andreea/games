@@ -6,6 +6,7 @@ import About from "./pages/About";
 import Boardgames from "./pages/Boardgames";
 import Consola from "./pages/Consola";
 import PCGames from "./pages/PCGames";
+import Settings from "./pages/Settings";
 import { Route, Routes } from "react-router-dom";
 
 function App() {
@@ -54,6 +55,16 @@ function App() {
           }
         >
           PCGames
+        </NavLink>
+        <NavLink
+          to="/settings"
+          className={({ isActive }) =>
+            isActive
+              ? "rounded-md bg-gray-900 px-3 py-2 text-sm font-medium text-white"
+              : "rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white"
+          }
+        >
+          Setings
         </NavLink>
       </nav>
     </div>

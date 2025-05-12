@@ -20,8 +20,8 @@ ReactDOM.createRoot(document.getElementById("root")).render(
         <Route path="/boardgames" element={<Boardgames />} />
         <Route path="/consola" element={<Consola />} />
         <Route path="/pcgames" element={<PCGames />} />
+        <Route path="/settings" element={<Settings />} />
       </Routes>
-      {/* </Layout> */}
     </BrowserRouter>
   </React.StrictMode>
 );
