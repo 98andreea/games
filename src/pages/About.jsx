@@ -47,6 +47,7 @@ export default function About() {
           flexWrap: "wrap", // adaptabil pe ecrane mici
         }}
       >
+        {" "}
         {/* GIF 1 - Boardgames */}
         <a
           href="/boardgames"
@@ -87,7 +88,6 @@ export default function About() {
             Boardgames
           </p>
         </a>
-
         {/* GIF 2 - Consoles */}
         <a
           href="/consoles"
@@ -128,7 +128,6 @@ export default function About() {
             Consoles
           </p>
         </a>
-
         {/* GIF 3 - PC Games */}
         <a
           href="/pcgames"

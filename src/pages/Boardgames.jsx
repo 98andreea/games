@@ -86,13 +86,11 @@ export default function Boardgames() {
           }}
         />
       </div>
-
       {/* afisare jocuri */}
       <div
         className="game-list"
         style={{
           display: "flex",
-          flexDirection: "column",
           alignItems: "center",
           justifyContent: "center",
           textAlign: "center",
@@ -101,56 +99,100 @@ export default function Boardgames() {
         }}
       >
         {/* Singleplayer Card */}
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "space-evenly",
-            width: "100%",
-            marginBottom: "10px",
-          }}
-        >
+        <div>
           <div
             style={{
-              textAlign: "center",
-              cursor: "default",
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "space-evenly",
+              width: "100%",
+              marginBottom: "10px",
             }}
           >
-            <img
-              src="images/milhouse-simpsons.gif"
-              alt="Console"
+            <div
               style={{
-                width: "250px",
-                height: "190px",
-                borderRadius: "20px",
+                textAlign: "center",
                 cursor: "default",
-                transition: "transform 0.3s ease, box-shadow 0.3s ease",
-                border: "3px solid #2d3748",
-              }}
-              onMouseEnter={(e) => {
-                e.target.style.transform = "scale(1.1)";
-                e.target.style.boxShadow = "0 4px 20px rgba(0, 0, 0, 0.2)";
-              }}
-              onMouseLeave={(e) => {
-                e.target.style.transform = "scale(1)";
-                e.target.style.boxShadow = "none";
-              }}
-            />
-            <p
-              style={{
-                fontWeight: "bold",
-                marginTop: "10px",
-                fontSize: "18px",
-                backgroundColor: "#1f2937",
-                color: "#fff",
-                padding: "8px 12px",
-                borderRadius: "8px",
               }}
             >
-              Singleplayer
-            </p>
+              <img
+                src="images/milhouse-simpsons.gif"
+                alt="Console"
+                style={{
+                  width: "250px",
+                  height: "190px",
+                  borderRadius: "20px",
+                  cursor: "default",
+                  transition: "transform 0.3s ease, box-shadow 0.3s ease",
+                  border: "3px solid #2d3748",
+                }}
+                onMouseEnter={(e) => {
+                  e.target.style.transform = "scale(1.1)";
+                  e.target.style.boxShadow = "0 4px 20px rgba(0, 0, 0, 0.2)";
+                }}
+                onMouseLeave={(e) => {
+                  e.target.style.transform = "scale(1)";
+                  e.target.style.boxShadow = "none";
+                }}
+              />
+              <p
+                style={{
+                  fontWeight: "bold",
+                  marginTop: "10px",
+                  fontSize: "18px",
+                  backgroundColor: "#1f2937",
+                  color: "#fff",
+                  padding: "8px 12px",
+                  borderRadius: "8px",
+                }}
+              >
+                Singleplayer
+              </p>
+            </div>
+            {/* Afișarea jocurilor pe categorii */}
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "space-around",
+                width: "100%",
+                flexWrap: "wrap",
+              }}
+            >
+              {/* Singleplayer */}
+              <div>
+                {gameList
+                  .filter((game) => game.gameMode === "singleplayer")
+                  .map((game, index) => (
+                    <div
+                      key={index}
+                      style={{
+                        backgroundColor: "#4a5568",
+                        color: "white",
+                        padding: "15px",
+                        borderRadius: "8px",
+                        marginBottom: "10px",
+                        boxShadow: "0 2px 5px rgba(0,0,0,0.3)",
+                        width: "260px",
+                      }}
+                    >
+                      <p>
+                        <strong>Name:</strong> {game.gameName}
+                      </p>
+                      <p>
+                        <strong>Age:</strong> {game.age}+
+                      </p>
+                      <p>
+                        <strong>Rating:</strong> {game.gameRating}/10
+                      </p>
+                    </div>
+                  ))}
+              </div>
+            </div>
           </div>
+        </div>
 
-          {/* Multiplayer Card */}
+        {/* Multiplayer Card */}
+        <div>
           <div
             style={{
               textAlign: "center",
@@ -191,79 +233,48 @@ export default function Boardgames() {
               Multiplayer
             </p>
           </div>
-        </div>
-
-        {/* Afișarea jocurilor pe categorii */}
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "space-around",
-            width: "100%",
-            flexWrap: "wrap",
-          }}
-        >
-          {/* Singleplayer */}
-          <div>
-            {gameList
-              .filter((game) => game.gameMode === "singleplayer")
-              .map((game, index) => (
-                <div
-                  key={index}
-                  style={{
-                    backgroundColor: "#4a5568",
-                    color: "white",
-                    padding: "15px",
-                    borderRadius: "8px",
-                    marginBottom: "10px",
-                    boxShadow: "0 2px 5px rgba(0,0,0,0.3)",
-                    width: "260px",
-                  }}
-                >
-                  <p>
-                    <strong>Name:</strong> {game.gameName}
-                  </p>
-                  <p>
-                    <strong>Age:</strong> {game.age}+
-                  </p>
-                  <p>
-                    <strong>Rating:</strong> {game.gameRating}/10
-                  </p>
-                </div>
-              ))}
-          </div>
-
-          {/* Multiplayer */}
-          <div>
-            {gameList
-              .filter((game) => game.gameMode === "multiplayer")
-              .map((game, index) => (
-                <div
-                  key={index}
-                  style={{
-                    backgroundColor: "#4a5568",
-                    color: "white",
-                    padding: "15px",
-                    borderRadius: "8px",
-                    marginBottom: "10px",
-                    boxShadow: "0 2px 5px rgba(0,0,0,0.3)",
-                    width: "300px",
-                  }}
-                >
-                  <p>
-                    <strong>Name:</strong> {game.gameName}
-                  </p>
-                  <p>
-                    <strong>Age:</strong> {game.age}+
-                  </p>
-                  <p>
-                    <strong>Rating:</strong> {game.gameRating}/10
-                  </p>
-                </div>
-              ))}
+          {/* Afișarea jocurilor pe categorii */}
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "space-around",
+              width: "100%",
+              flexWrap: "wrap",
+              flexDirection: "column",
+            }}
+          >
+            {/* Multiplayer */}
+            <div>
+              {gameList
+                .filter((game) => game.gameMode === "multiplayer")
+                .map((game, index) => (
+                  <div
+                    key={index}
+                    style={{
+                      backgroundColor: "#4a5568",
+                      color: "white",
+                      padding: "15px",
+                      borderRadius: "8px",
+                      marginBottom: "10px",
+                      boxShadow: "0 2px 5px rgba(0,0,0,0.3)",
+                      width: "300px",
+                    }}
+                  >
+                    <p>
+                      <strong>Name:</strong> {game.gameName}
+                    </p>
+                    <p>
+                      <strong>Age:</strong> {game.age}+
+                    </p>
+                    <p>
+                      <strong>Rating:</strong> {game.gameRating}/10
+                    </p>
+                  </div>
+                ))}
+            </div>
           </div>
         </div>
       </div>
-
       <div style={{ width: "200px" }}>
         {/* buton adaugare sectiune joc */}
         <button
