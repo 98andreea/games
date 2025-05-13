@@ -60,7 +60,7 @@ export default function About() {
               borderRadius: "20px",
               cursor: "pointer",
               transition: "transform 0.3s ease, box-shadow 0.3s ease",
-              border: "3px solid #000",
+              border: "3px solid #2d3748",
               marginTop: "-450px",
             }}
             onMouseEnter={(e) => {
@@ -100,7 +100,7 @@ export default function About() {
               borderRadius: "20px",
               cursor: "pointer",
               transition: "transform 0.3s ease, box-shadow 0.3s ease",
-              border: "3px solid #fff",
+              border: "3px solid #2d3748",
               marginTop: "-450px",
             }}
             onMouseEnter={(e) => {
@@ -140,6 +140,7 @@ export default function About() {
               borderRadius: "20px",
               cursor: "pointer",
               transition: "transform 0.3s ease, box-shadow 0.3s ease",
+              border: "3px solid #2d3748",
               marginTop: "-450px",
             }}
             onMouseEnter={(e) => {

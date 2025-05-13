@@ -1,9 +1,15 @@
 import React, { useState } from "react";
 import Layout from "../Layout";
 
+const MIN_AGE = 3;
+const MAX_AGE = 99;
+const MIN_RAITING = 1;
+const MAX_RAITING = 10;
+const DEFAULT_MODE = "Singleplayer";
+
 export default function Boardgames() {
   const [gameName, setGameName] = useState("");
-  const [gameMode, setGameMode] = useState("Singleplayer");
+  const [gameMode, setGameMode] = useState(DEFAULT_MODE);
   const [age, setAge] = useState("");
   const [gameRating, setGameRating] = useState("");
   const [gameDescription, setgameDescription] = useState("");
@@ -26,14 +32,19 @@ export default function Boardgames() {
       newErrors.gameName = "";
     }
 
-    if (!age || age < 3 || age > 99) {
-      newErrors.age = "Age must be between 3 and 99";
+    if (!age || age < MIN_AGE || age > MAX_AGE) {
+      newErrors.age = "Age must be between ${MIN_AGE} and ${MAX_AGE}";
     } else {
       newErrors.age = "";
     }
 
-    if (!gameRating || gameRating < 1 || gameRating > 10) {
-      newErrors.gameRating = "Raiting mus be between 1 and 10";
+    if (
+      !gameRating ||
+      Number(gameRating) < MIN_RAITING ||
+      Number(gameRating) > MAX_RAITING
+    ) {
+      newErrors.gameRating =
+        "Rating must be between ${MIN_RAITING} and ${MAX_RAITING}";
     }
 
     setErrors(newErrors);
@@ -41,7 +52,13 @@ export default function Boardgames() {
     if (!newErrors.gameName && !newErrors.age && !newErrors.gameRating) {
       setGameList([
         ...gameList,
-        { gameName, gameMode, age, gameRating, gameDescription },
+        {
+          gameName,
+          gameMode,
+          age,
+          gameRating: Number(gameRating),
+          gameDescription,
+        },
       ]);
 
       //resetare campuri pt joc nou
@@ -55,116 +72,311 @@ export default function Boardgames() {
   };
 
   return (
-    <div className="boardgames">
-      <img
-        src="images/10069030-removebg-preview.png"
-        style={{
-          width: "400px",
-          height: "auto",
-          marginTop: "80px",
-          marginBottom: "20px",
-          marginRight: "auto",
-          marginLeft: "20px",
-        }}
-      />
-      {/* buton adaugare sectiune joc */}
-      <button
-        onClick={() => setShowForm(!showForm)}
-        className="bg-gray-800 text-white p-2 rounded"
-      >
-        +
-      </button>
-      {/* adaugare joc */}
-      {showForm && (
-        <div className="bg-gray-800 p-4 mt-4 text-white rounded">
-          <form onSubmit={handleSubmit}>
-            {/* game name */}
-            <div>
-              <label htmlFor="gameName">Game name</label>
-              <input
-                type="text"
-                id="gameName"
-                value={gameName}
-                onChange={(e) => setGameName(e.target.value)}
-                className="w-full p-2 mt-2 bg-white text-black"
-              />
-              {errors.gameName && (
-                <p style={{ color: "red" }}>{errors.gameName}</p>
-              )}
-            </div>
-            {/*game mode*/}
-            <div>
-              <label htmlFor="gameMode">Game mode</label>
-              <select
-                id="gameMode"
-                value={gameMode}
-                onChange={(e) => setGameMode(e.target.value)}
-                className="w-full p-2 mt-2 bg-white text-black"
-              >
-                <option value="singleplayer">Singleplayer</option>
-                <option value="multiplayer">Multiplayer</option>
-              </select>
-              {errors.gameMode && (
-                <p style={{ color: "red" }}>{errors.gameMode}</p>
-              )}
-            </div>
-            {/* age */}
-            <div>
-              <label htmlFor="age">Age</label>
-              <select
-                id="age"
-                value={age}
-                onChange={(e) => setAge(e.target.value)}
-                className="w-full p-2 mt-2 bg-white text-black"
-              >
-                <option value="">Select age</option>
-                {Array.from({ length: 97 }, (_, i) => i + 3).map((age) => (
-                  <option key={age} value={age}>
-                    {age}
-                  </option>
-                ))}
-              </select>
-              {errors.age && <p style={{ color: "red" }}>{errors.aq}</p>}
-            </div>
+    <div className="boardgames" style={{ display: "flex" }}>
+      <div style={{ marginLeft: "0px" }}>
+        <img
+          src="images/10069030-removebg-preview.png"
+          style={{
+            width: "500px",
+            height: "auto",
+            marginTop: "80px",
+            marginBottom: "20px",
+            marginRight: "auto",
+          }}
+        />
+      </div>
 
-            {/* raiting*/}
-            <div>
-              <label htmlFor="gameRating">Game rating</label>
-              <select
-                id="gameRating"
-                value={gameRating}
-                onChange={(e) => setGameRating(e.target.value)}
-                className="w-full p-2 mt-2 bg-white text-black"
-              >
-                <option value="">Select game rating</option>
-                {Array.from({ length: 10 }, (_, i) => i + 1).map(
-                  (gameRating) => (
+      {/* afisare jocuri */}
+      <div
+        className="game-list"
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          justifyContent: "center",
+          textAlign: "center",
+          height: "100vh",
+          paddingTop: "20px",
+          width: "100%",
+        }}
+      >
+        {/* line */}
+        <div
+          style={{
+            width: "100%",
+            borderTop: "2px solidrgb(24, 43, 72)",
+            marginBottom: "30px",
+          }}
+        ></div>
+
+        {/* Singleplayer Card */}
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "space-evenly",
+            // alignItems: "center",
+            // gap: "80px",
+            marginTop: "100px",
+            width: "100%",
+          }}
+        >
+          <div
+            style={{
+              textAlign: "center",
+              cursor: "default", // Elimină cursorul pointer
+            }}
+          >
+            <img
+              src="images/milhouse-simpsons.gif"
+              alt="Console"
+              style={{
+                width: "250px",
+                borderRadius: "20px",
+                cursor: "default",
+                transition: "transform 0.3s ease, box-shadow 0.3s ease",
+                border: "3px solid #2d3748",
+                marginTop: "-350px",
+              }}
+              onMouseEnter={(e) => {
+                e.target.style.transform = "scale(1.1)";
+                e.target.style.boxShadow = "0 4px 20px rgba(0, 0, 0, 0.2)";
+              }}
+              onMouseLeave={(e) => {
+                e.target.style.transform = "scale(1)";
+                e.target.style.boxShadow = "none";
+              }}
+            />
+            <p
+              style={{
+                fontWeight: "bold",
+                marginTop: "10px",
+                fontSize: "18px",
+                backgroundColor: "#1f2937",
+                color: "#fff",
+                padding: "8px 12px",
+                borderRadius: "8px",
+              }}
+            >
+              Singleplayer
+            </p>
+          </div>
+
+          {/* Multiplayer Card */}
+          <div
+            style={{
+              textAlign: "center",
+              cursor: "default", // Elimină cursorul pointer
+            }}
+          >
+            <img
+              src="images/FFUS.gif"
+              alt="Console"
+              style={{
+                width: "250px",
+                borderRadius: "20px",
+                cursor: "default",
+                transition: "transform 0.3s ease, box-shadow 0.3s ease",
+                border: "3px solid #2d3748",
+                marginTop: "-350px",
+              }}
+              onMouseEnter={(e) => {
+                e.target.style.transform = "scale(1.1)";
+                e.target.style.boxShadow = "0 4px 20px rgba(0, 0, 0, 0.2)";
+              }}
+              onMouseLeave={(e) => {
+                e.target.style.transform = "scale(1)";
+                e.target.style.boxShadow = "none";
+              }}
+            />
+            <p
+              style={{
+                fontWeight: "bold",
+                marginTop: "10px",
+                fontSize: "18px",
+                backgroundColor: "#1f2937",
+                color: "#fff",
+                padding: "8px 12px",
+                borderRadius: "8px",
+              }}
+            >
+              Multiplayer
+            </p>
+          </div>
+        </div>
+
+        {/* Afișarea jocurilor */}
+        {gameList
+          .filter((game) => game.gameMode === "singleplayer")
+          .map((game, index) => (
+            <div key={index} className="game-item">
+              <h3>{game.gameName}</h3>
+              <p>Mode: {game.gameMode}</p>
+              <p>Age: {game.age}</p>
+              <p>Rating: {game.gameRating}</p>
+              <p>Description: {game.gameDescription}</p>
+            </div>
+          ))}
+      </div>
+
+      <div style={{ width: "200px" }}>
+        {/* buton adaugare sectiune joc */}
+        <button
+          onClick={() => setShowForm(!showForm)}
+          className="bg-gray-800 text-white p-2 rounded"
+          style={{ cursor: "pointer" }}
+        >
+          Add a game +
+        </button>
+        {/* adaugare joc */}
+        {showForm && (
+          <div
+            style={{
+              position: "absolute",
+              top: "50%",
+              left: "50%",
+              transform: "translate(-50%, -50%)",
+              backgroundColor: "#1f2937",
+              padding: "20px",
+              borderRadius: "8px",
+              color: "white",
+              zIndex: 1000,
+              width: "400px",
+              boxShadow: "0px 5px 15px rgba(0, 0, 0, 0.2)",
+            }}
+          >
+            {/* Titlul formularului */}
+            <h2 style={{ textAlign: "center", marginBottom: "20px" }}>
+              Add a Game
+            </h2>
+            {/* Buton X în casetă */}
+            <button
+              onClick={() => setShowForm(false)}
+              style={{
+                position: "absolute",
+                top: "10px",
+                right: "10px",
+                background: "#4B5563",
+                border: "none",
+                color: "white",
+                fontSize: "20px",
+                width: "30px",
+                height: "30px",
+                borderRadius: "50%",
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                cursor: "pointer",
+                boxShadow: "0px 2px 5px rgba(0, 0, 0, 0.3)",
+              }}
+            >
+              X
+            </button>
+            <form onSubmit={handleSubmit}>
+              {/* game name */}
+              <div>
+                <label htmlFor="gameName">Game name*</label>
+                <input
+                  type="text"
+                  id="gameName"
+                  value={gameName}
+                  onChange={(e) => setGameName(e.target.value)}
+                  className="w-full p-2 mt-2 bg-white text-black"
+                />
+                {errors.gameName && (
+                  <p style={{ color: "red" }}>{errors.gameName}</p>
+                )}
+              </div>
+
+              {/*game mode*/}
+              <div>
+                <label htmlFor="gameMode">Game mode*</label>
+                <select
+                  id="gameMode"
+                  value={gameMode}
+                  onChange={(e) => setGameMode(e.target.value)}
+                  className="w-full p-2 mt-2 bg-white text-black"
+                >
+                  <option value="singleplayer">Singleplayer</option>
+                  <option value="multiplayer">Multiplayer</option>
+                </select>
+                {errors.gameMode && (
+                  <p style={{ color: "red" }}>{errors.gameMode}</p>
+                )}
+              </div>
+
+              {/* age */}
+              <div>
+                <label htmlFor="age">Age*</label>
+                <select
+                  id="age"
+                  value={age}
+                  onChange={(e) => setAge(e.target.value)}
+                  className="w-full p-2 mt-2 bg-white text-black"
+                >
+                  <option value="">Select age</option>
+                  {Array.from(
+                    { length: MAX_AGE - MIN_AGE + 1 },
+                    (_, i) => i + MIN_AGE
+                  ).map((age) => (
+                    <option key={age} value={age}>
+                      {age}+
+                    </option>
+                  ))}
+                </select>
+                {errors.age && <p style={{ color: "red" }}>{errors.age}</p>}
+              </div>
+
+              {/* raiting*/}
+              <div>
+                <label htmlFor="gameRating">Game rating*</label>
+                <select
+                  id="gameRating"
+                  value={gameRating}
+                  onChange={(e) => setGameRating(e.target.value)}
+                  className="w-full p-2 mt-2 bg-white text-black"
+                >
+                  <option value="">Select game rating</option>
+                  {Array.from(
+                    { length: MAX_RAITING - MIN_RAITING + 1 },
+                    (_, i) => i + MIN_RAITING
+                  ).map((gameRating) => (
                     <option key={gameRating} value={gameRating}>
                       {gameRating}
                     </option>
-                  )
+                  ))}
+                </select>
+                {errors.gameRating && (
+                  <p style={{ color: "red" }}>{errors.gameRating}</p>
                 )}
-              </select>
-              {errors.age && <p style={{ color: "red" }}>{errors.aq}</p>}
 
-              {/* gameDescription*/}
-              <div>
-                <label htmlFor="gameDescription">Game Description*</label>
-                <input
-                  type="text"
-                  id="gameDescription"
-                  value={gameDescription}
-                  onChange={(e) => setGameDescription(e.target.value)}
-                  className="w-full p-2 mt-2 bg-white text-black"
-                />
-                {errors.gameDescription && (
-                  <p style={{ color: "red" }}>{errors.gameDescription}</p>
-                )}
+                {/* gameDescription*/}
+                <div>
+                  <label htmlFor="gameDescription">
+                    Game description (optional)
+                  </label>
+                  <input
+                    type="text"
+                    id="gameDescription"
+                    value={gameDescription}
+                    onChange={(e) => setGameDescription(e.target.value)}
+                    className="w-full p-2 mt-2 bg-white text-black"
+                  />
+
+                  {/* {button add game */}
+                  <div>
+                    <button
+                      type="submit"
+                      className="bg-green-500 text-white p-2 rounded mt-4"
+                    >
+                      Add game
+                    </button>
+                  </div>
+                </div>
               </div>
-            </div>
-          </form>
-        </div>
-      )}
+            </form>
+          </div>
+        )}
+      </div>
     </div>
   );
 }
