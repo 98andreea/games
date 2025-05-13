@@ -56,7 +56,8 @@ export default function About() {
             src="images/084bdf8b5ef6678ff0e787e50094f27f.jpg"
             alt="Boardgames"
             style={{
-              width: "250px",
+              width: "300px",
+              height: "190px",
               borderRadius: "20px",
               cursor: "pointer",
               transition: "transform 0.3s ease, box-shadow 0.3s ease",
@@ -96,7 +97,8 @@ export default function About() {
             src="images/d4efc0f072a55e5ebd0a9946f9536a94.gif"
             alt="Console"
             style={{
-              width: "250px",
+              width: "300px",
+              height: "190px",
               borderRadius: "20px",
               cursor: "pointer",
               transition: "transform 0.3s ease, box-shadow 0.3s ease",
@@ -136,9 +138,10 @@ export default function About() {
             src="images/9070324cdfc07c68d60eed0c39e77573.gif"
             alt="PC Games"
             style={{
-              width: "350px",
+              width: "300px",
               borderRadius: "20px",
               cursor: "pointer",
+              height: "190px",
               transition: "transform 0.3s ease, box-shadow 0.3s ease",
               border: "3px solid #2d3748",
               marginTop: "-450px",

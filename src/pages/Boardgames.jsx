@@ -5,28 +5,30 @@ const MIN_AGE = 3;
 const MAX_AGE = 99;
 const MIN_RAITING = 1;
 const MAX_RAITING = 10;
-const DEFAULT_MODE = "Singleplayer";
+const DEFAULT_MODE = "singleplayer";
 
 export default function Boardgames() {
   const [gameName, setGameName] = useState("");
   const [gameMode, setGameMode] = useState(DEFAULT_MODE);
   const [age, setAge] = useState("");
   const [gameRating, setGameRating] = useState("");
-  const [gameDescription, setgameDescription] = useState("");
   const [errors, setErrors] = useState({
     gameName: "",
     age: "",
     gameRating: "",
   });
   const [showForm, setShowForm] = useState(false);
-  const [gameList, setGameList] = useState([]);
+  const [gameList, setGameList] = useState(() => {
+    const savedGames = localStorage.getItem("gameList");
+    return savedGames ? JSON.parse(savedGames) : [];
+  });
 
   const handleSubmit = (e) => {
     e.preventDefault();
     let newErrors = { ...errors };
 
     //validari
-    if (!gameName || gameName.length < 1) {
+    if (!gameName || gameName.trim().length < 1) {
       newErrors.gameName = "The game must have at least 1 letter";
     } else {
       newErrors.gameName = "";
@@ -50,23 +52,22 @@ export default function Boardgames() {
     setErrors(newErrors);
 
     if (!newErrors.gameName && !newErrors.age && !newErrors.gameRating) {
-      setGameList([
-        ...gameList,
-        {
-          gameName,
-          gameMode,
-          age,
-          gameRating: Number(gameRating),
-          gameDescription,
-        },
-      ]);
+      const newGame = {
+        gameName,
+        gameMode,
+        age,
+        gameRating: Number(gameRating),
+      };
+
+      const updatedList = [...gameList, newGame];
+      setGameList(updatedList);
+      localStorage.setItem("gameList", JSON.stringify(updatedList));
 
       //resetare campuri pt joc nou
       setGameName("");
-      setGameMode("Singleplayer");
+      setGameMode(DEFAULT_MODE);
       setAge("");
       setGameRating("");
-      setGameDescription("");
       setShowForm(false); //inchidere formular
     }
   };
@@ -95,35 +96,23 @@ export default function Boardgames() {
           alignItems: "center",
           justifyContent: "center",
           textAlign: "center",
-          height: "100vh",
           paddingTop: "20px",
           width: "100%",
         }}
       >
-        {/* line */}
-        <div
-          style={{
-            width: "100%",
-            borderTop: "2px solidrgb(24, 43, 72)",
-            marginBottom: "30px",
-          }}
-        ></div>
-
         {/* Singleplayer Card */}
         <div
           style={{
             display: "flex",
             justifyContent: "space-evenly",
-            // alignItems: "center",
-            // gap: "80px",
-            marginTop: "100px",
             width: "100%",
+            marginBottom: "10px",
           }}
         >
           <div
             style={{
               textAlign: "center",
-              cursor: "default", // Elimină cursorul pointer
+              cursor: "default",
             }}
           >
             <img
@@ -131,11 +120,11 @@ export default function Boardgames() {
               alt="Console"
               style={{
                 width: "250px",
+                height: "190px",
                 borderRadius: "20px",
                 cursor: "default",
                 transition: "transform 0.3s ease, box-shadow 0.3s ease",
                 border: "3px solid #2d3748",
-                marginTop: "-350px",
               }}
               onMouseEnter={(e) => {
                 e.target.style.transform = "scale(1.1)";
@@ -165,7 +154,7 @@ export default function Boardgames() {
           <div
             style={{
               textAlign: "center",
-              cursor: "default", // Elimină cursorul pointer
+              cursor: "default",
             }}
           >
             <img
@@ -173,11 +162,11 @@ export default function Boardgames() {
               alt="Console"
               style={{
                 width: "250px",
+                height: "190px",
                 borderRadius: "20px",
                 cursor: "default",
                 transition: "transform 0.3s ease, box-shadow 0.3s ease",
                 border: "3px solid #2d3748",
-                marginTop: "-350px",
               }}
               onMouseEnter={(e) => {
                 e.target.style.transform = "scale(1.1)";
@@ -204,18 +193,75 @@ export default function Boardgames() {
           </div>
         </div>
 
-        {/* Afișarea jocurilor */}
-        {gameList
-          .filter((game) => game.gameMode === "singleplayer")
-          .map((game, index) => (
-            <div key={index} className="game-item">
-              <h3>{game.gameName}</h3>
-              <p>Mode: {game.gameMode}</p>
-              <p>Age: {game.age}</p>
-              <p>Rating: {game.gameRating}</p>
-              <p>Description: {game.gameDescription}</p>
-            </div>
-          ))}
+        {/* Afișarea jocurilor pe categorii */}
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "space-around",
+            width: "100%",
+            flexWrap: "wrap",
+          }}
+        >
+          {/* Singleplayer */}
+          <div>
+            {gameList
+              .filter((game) => game.gameMode === "singleplayer")
+              .map((game, index) => (
+                <div
+                  key={index}
+                  style={{
+                    backgroundColor: "#4a5568",
+                    color: "white",
+                    padding: "15px",
+                    borderRadius: "8px",
+                    marginBottom: "10px",
+                    boxShadow: "0 2px 5px rgba(0,0,0,0.3)",
+                    width: "260px",
+                  }}
+                >
+                  <p>
+                    <strong>Name:</strong> {game.gameName}
+                  </p>
+                  <p>
+                    <strong>Age:</strong> {game.age}+
+                  </p>
+                  <p>
+                    <strong>Rating:</strong> {game.gameRating}/10
+                  </p>
+                </div>
+              ))}
+          </div>
+
+          {/* Multiplayer */}
+          <div>
+            {gameList
+              .filter((game) => game.gameMode === "multiplayer")
+              .map((game, index) => (
+                <div
+                  key={index}
+                  style={{
+                    backgroundColor: "#4a5568",
+                    color: "white",
+                    padding: "15px",
+                    borderRadius: "8px",
+                    marginBottom: "10px",
+                    boxShadow: "0 2px 5px rgba(0,0,0,0.3)",
+                    width: "300px",
+                  }}
+                >
+                  <p>
+                    <strong>Name:</strong> {game.gameName}
+                  </p>
+                  <p>
+                    <strong>Age:</strong> {game.age}+
+                  </p>
+                  <p>
+                    <strong>Rating:</strong> {game.gameRating}/10
+                  </p>
+                </div>
+              ))}
+          </div>
+        </div>
       </div>
 
       <div style={{ width: "200px" }}>
@@ -227,6 +273,7 @@ export default function Boardgames() {
         >
           Add a game +
         </button>
+
         {/* adaugare joc */}
         {showForm && (
           <div
@@ -248,6 +295,7 @@ export default function Boardgames() {
             <h2 style={{ textAlign: "center", marginBottom: "20px" }}>
               Add a Game
             </h2>
+
             {/* Buton X în casetă */}
             <button
               onClick={() => setShowForm(false)}
@@ -349,28 +397,15 @@ export default function Boardgames() {
                   <p style={{ color: "red" }}>{errors.gameRating}</p>
                 )}
 
-                {/* gameDescription*/}
+                {/* {button add game */}
                 <div>
-                  <label htmlFor="gameDescription">
-                    Game description (optional)
-                  </label>
-                  <input
-                    type="text"
-                    id="gameDescription"
-                    value={gameDescription}
-                    onChange={(e) => setGameDescription(e.target.value)}
-                    className="w-full p-2 mt-2 bg-white text-black"
-                  />
-
-                  {/* {button add game */}
-                  <div>
-                    <button
-                      type="submit"
-                      className="bg-green-500 text-white p-2 rounded mt-4"
-                    >
-                      Add game
-                    </button>
-                  </div>
+                  <button
+                    onClick={gameList}
+                    type="submit"
+                    className="bg-green-500 text-white p-2 rounded mt-4"
+                  >
+                    Add game
+                  </button>
                 </div>
               </div>
             </form>
