@@ -8,6 +8,7 @@ import Consola from "./pages/Consola";
 import PCGames from "./pages/PCGames";
 import Settings from "./pages/Settings";
 import { Route, Routes } from "react-router-dom";
+// import Font from "./components/Font";
 
 function App() {
   return (

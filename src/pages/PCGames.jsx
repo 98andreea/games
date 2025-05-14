@@ -72,7 +72,7 @@ export default function PCGames() {
   };
 
   return (
-    <div className="consola" style={{ display: "flex" }}>
+    <div className="pcgames" style={{ display: "flex" }}>
       <div style={{ marginLeft: "0px" }}>
         <img
           src="images/Lovepik_com-380603786-gaming-pc-vector-pc-game-cartoon-game-removebg-preview.png"

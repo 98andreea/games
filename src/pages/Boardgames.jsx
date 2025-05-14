@@ -18,8 +18,8 @@ export default function Boardgames() {
     gameRating: "",
   });
   const [showForm, setShowForm] = useState(false);
-  const [gameList, setGameList] = useState(() => {
-    const savedGames = localStorage.getItem("gameList");
+  const [boardGamesList, setboardGamesList] = useState(() => {
+    const savedGames = localStorage.getItem("boardGamesList");
     return savedGames ? JSON.parse(savedGames) : [];
   });
 
@@ -58,9 +58,9 @@ export default function Boardgames() {
         gameRating: Number(gameRating),
       };
 
-      const updatedList = [...gameList, newGame];
-      setGameList(updatedList);
-      localStorage.setItem("gameList", JSON.stringify(updatedList));
+      const updatedList = [...boardGamesList, newGame];
+      setboardGamesList(updatedList);
+      localStorage.setItem("boardGamesList", JSON.stringify(updatedList));
 
       //resetare campuri pt joc nou
       setGameName("");
@@ -156,7 +156,7 @@ export default function Boardgames() {
           >
             {/* Singleplayer */}
             <div>
-              {gameList
+              {boardGamesList
                 .filter((game) => game.gameMode === "singleplayer")
                 .map((game, index) => (
                   <div
@@ -247,7 +247,7 @@ export default function Boardgames() {
           >
             {/* Multiplayer */}
             <div>
-              {gameList
+              {boardGamesList
                 .filter((game) => game.gameMode === "multiplayer")
                 .map((game, index) => (
                   <div
@@ -413,7 +413,7 @@ export default function Boardgames() {
                 {/* {button add game */}
                 <div>
                   <button
-                    onClick={gameList}
+                    onClick={boardGamesList}
                     type="submit"
                     className="bg-green-500 text-white p-2 rounded mt-4"
                   >
