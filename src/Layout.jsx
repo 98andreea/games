@@ -177,7 +177,7 @@ export default function Layout() {
                       <span className="sr-only">Open settings menu</span>
                       Settings
                     </Link>
-                    <a
+                    {/* <a
                       href="#"
                       className="block px-4 py-2 text-sm text-gray-700"
                       role="menuitem"
@@ -185,7 +185,7 @@ export default function Layout() {
                       id="user-menu-item-1"
                     >
                       Light/Dark Theme
-                    </a>
+                    </a> */}
                   </div>
                 )}
               </div>

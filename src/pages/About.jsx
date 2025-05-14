@@ -4,11 +4,8 @@ export default function About() {
       <div
         className="about"
         style={{
-          // display: "flex",
           justifyContent: "center",
           alignItems: "center",
-          // height: "100vh",
-          backgroundColor: "#fff",
           padding: "0 30px",
           gap: "40px",
         }}
