@@ -9,20 +9,22 @@ import Boardgames from "./pages/Boardgames";
 import Consola from "./pages/Consola";
 import PCGames from "./pages/PCGames";
 import Settings from "./pages/Settings";
+import Font from "./components/Font";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <BrowserRouter>
-      <Layout />
-
-      <Routes>
-        <Route index element={<About />} />
-        <Route path="/about" element={<About />} />
-        <Route path="/boardgames" element={<Boardgames />} />
-        <Route path="/consola" element={<Consola />} />
-        <Route path="/pcgames" element={<PCGames />} />
-        <Route path="/settings" element={<Settings />} />
-      </Routes>
+      <Font>
+        <Layout />
+        <Routes>
+          <Route index element={<About />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/boardgames" element={<Boardgames />} />
+          <Route path="/consola" element={<Consola />} />
+          <Route path="/pcgames" element={<PCGames />} />
+          <Route path="/settings" element={<Settings />} />
+        </Routes>
+      </Font>
     </BrowserRouter>
   </React.StrictMode>
 );
