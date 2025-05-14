@@ -35,7 +35,7 @@ export default function Boardgames() {
     }
 
     if (!age || age < MIN_AGE || age > MAX_AGE) {
-      newErrors.age = "Age must be between ${MIN_AGE} and ${MAX_AGE}";
+      newErrors.age = `Age must be between ${MIN_AGE} and ${MAX_AGE}`;
     } else {
       newErrors.age = "";
     }
@@ -45,8 +45,7 @@ export default function Boardgames() {
       Number(gameRating) < MIN_RAITING ||
       Number(gameRating) > MAX_RAITING
     ) {
-      newErrors.gameRating =
-        "Rating must be between ${MIN_RAITING} and ${MAX_RAITING}";
+      newErrors.gameRating = `Rating must be between ${MIN_RAITING} and ${MAX_RAITING}`;
     }
 
     setErrors(newErrors);

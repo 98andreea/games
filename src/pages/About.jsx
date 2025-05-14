@@ -10,6 +10,7 @@ export default function About() {
           height: "100vh",
           backgroundColor: "#fff",
           padding: "0 30px",
+          gap: "40px",
         }}
       >
         <img
@@ -23,28 +24,30 @@ export default function About() {
           style={{ width: "250px", marginTop: "-400px", marginRight: "1000px" }}
         />
       </div>
-
-      <p
+      <div
         style={{
-          maxWidth: "800px",
+          // maxWidth: "800px",
           fontSize: "20px",
-          color: "#000",
+          color: "#1f2937",
           marginBottom: "40px",
-          textAlign: "center", // Aliniere centru pentru text
-          marginTop: "20px", // Distanță față de imagini
+          textAlign: "center",
+          margin: "0 auto",
+          gap: "40px",
+          fontWeight: "bold",
         }}
       >
-        Descoperă jocuri care se potrivesc fie pentru o seară relaxantă singur,
-        fie pentru distracție maximă alături de cei dragi, fie online, fie la
-        petreceri!
-      </p>
+        <h1>
+          Discover games that are suitable for either a relaxing evening alone,
+          or for maximum fun with your loved ones, either online, or at parties!
+        </h1>
+      </div>
 
       <div
         style={{
           display: "flex",
           justifyContent: "center",
           gap: "40px", // distanță egală între GIF-uri
-          flexWrap: "wrap", // adaptabil pe ecrane mici
+          flexWrap: "wrap",
         }}
       >
         {" "}
@@ -63,7 +66,7 @@ export default function About() {
               cursor: "pointer",
               transition: "transform 0.3s ease, box-shadow 0.3s ease",
               border: "3px solid #2d3748",
-              marginTop: "-450px",
+              // marginTop: "-450px",
             }}
             onMouseEnter={(e) => {
               e.target.style.transform = "scale(1.1)";
@@ -103,7 +106,7 @@ export default function About() {
               cursor: "pointer",
               transition: "transform 0.3s ease, box-shadow 0.3s ease",
               border: "3px solid #2d3748",
-              marginTop: "-450px",
+              // marginTop: "-450px",
             }}
             onMouseEnter={(e) => {
               e.target.style.transform = "scale(1.1)";
@@ -143,7 +146,7 @@ export default function About() {
               height: "190px",
               transition: "transform 0.3s ease, box-shadow 0.3s ease",
               border: "3px solid #2d3748",
-              marginTop: "-450px",
+              // marginTop: "-450px",
             }}
             onMouseEnter={(e) => {
               e.target.style.transform = "scale(1.1)";
