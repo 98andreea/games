@@ -26,7 +26,8 @@ export default function Boardgames() {
     return savedGames ? JSON.parse(savedGames) : [];
   });
 
-  const [highlightedIndex, setHighlightedIndex] = useState(null);
+  const [highlightedSingleIndex, setHighlightedSingleIndex] = useState(null);
+  const [highlightedMultiIndex, setHighlightedMultiIndex] = useState(null);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -63,16 +64,22 @@ export default function Boardgames() {
         gameRating: Number(gameRating),
       };
 
-      // Adaug jocul și sortez lista după rating descrescător
+      // Adaug jocul și sortez lista generală
       const updatedList = [...boardGamesList, newGame].sort(
         (a, b) => b.gameRating - a.gameRating
       );
 
+      // Salvează în localStorage
       setboardGamesList(updatedList);
       localStorage.setItem("boardGamesList", JSON.stringify(updatedList));
 
-      // CAUTĂ INDEXUL JOCULUI NOU
-      const newIndex = updatedList.findIndex(
+      // Filtrare doar pentru modul în care a fost adăugat jocul
+      const filteredList = updatedList.filter(
+        (game) => game.gameMode === newGame.gameMode
+      );
+
+      // Caută indexul noului joc în lista filtrată
+      const newFilteredIndex = filteredList.findIndex(
         (game) =>
           game.gameName === newGame.gameName &&
           game.age === newGame.age &&
@@ -80,8 +87,14 @@ export default function Boardgames() {
           game.gameMode === newGame.gameMode
       );
 
-      setHighlightedIndex(newIndex);
-      setTimeout(() => setHighlightedIndex(null), 2000);
+      // Setează indexul corect pentru lista respectivă
+      if (newGame.gameMode === "singleplayer") {
+        setHighlightedSingleIndex(newFilteredIndex);
+        setTimeout(() => setHighlightedSingleIndex(null), 2000);
+      } else {
+        setHighlightedMultiIndex(newFilteredIndex);
+        setTimeout(() => setHighlightedMultiIndex(null), 2000);
+      }
 
       // resetare
       setGameName("");
@@ -185,8 +198,9 @@ export default function Boardgames() {
                     key={index}
                     style={{
                       backgroundColor:
-                        highlightedIndex === index ? "yellow" : "#4a5568",
-                      color: highlightedIndex === index ? "black" : "white",
+                        highlightedSingleIndex === index ? "yellow" : "#4a5568",
+                      color:
+                        highlightedSingleIndex === index ? "black" : "white",
                       padding: "15px",
                       borderRadius: "8px",
                       marginBottom: "10px",
@@ -273,17 +287,21 @@ export default function Boardgames() {
             <div>
               {boardGamesList
                 .filter((game) => game.gameMode === "multiplayer")
+                .sort((a, b) => b.gameRating - a.gameRating)
                 .map((game, index) => (
                   <div
                     key={index}
                     style={{
-                      backgroundColor: "#4a5568",
-                      color: "white",
+                      backgroundColor:
+                        highlightedMultiIndex === index ? "yellow" : "#4a5568",
+                      color:
+                        highlightedMultiIndex === index ? "black" : "white",
                       padding: "15px",
                       borderRadius: "8px",
                       marginBottom: "10px",
                       boxShadow: "0 2px 5px rgba(0,0,0,0.3)",
                       width: "260px",
+                      transition: "background-color 0.3s ease",
                     }}
                   >
                     <p>

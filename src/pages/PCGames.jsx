@@ -24,6 +24,9 @@ export default function PCGames() {
     return savedGames ? JSON.parse(savedGames) : [];
   });
 
+  const [highlightedSingleIndex, setHighlightedSingleIndex] = useState(null);
+  const [highlightedMultiIndex, setHighlightedMultiIndex] = useState(null);
+
   const handleSubmit = (e) => {
     e.preventDefault();
     let newErrors = { ...errors };
@@ -59,16 +62,44 @@ export default function PCGames() {
         gameRating: Number(gameRating),
       };
 
-      const updatedList = [...pcGamesList, newGame];
+      // Adaug jocul și sortez lista generală
+      const updatedList = [...pcGamesList, newGame].sort(
+        (a, b) => b.gameRating - a.gameRating
+      );
+
+      // Salvează în localStorage
       setpcGamesList(updatedList);
       localStorage.setItem("pcGamesList", JSON.stringify(updatedList));
 
-      //resetare campuri pt joc nou
+      // Filtrare doar pentru modul în care a fost adăugat jocul
+      const filteredList = updatedList.filter(
+        (game) => game.gameMode === newGame.gameMode
+      );
+
+      // Caută indexul noului joc în lista filtrată
+      const newFilteredIndex = filteredList.findIndex(
+        (game) =>
+          game.gameName === newGame.gameName &&
+          game.age === newGame.age &&
+          game.gameRating === newGame.gameRating &&
+          game.gameMode === newGame.gameMode
+      );
+
+      // Setează indexul corect pentru lista respectivă
+      if (newGame.gameMode === "singleplayer") {
+        setHighlightedSingleIndex(newFilteredIndex);
+        setTimeout(() => setHighlightedSingleIndex(null), 2000);
+      } else {
+        setHighlightedMultiIndex(newFilteredIndex);
+        setTimeout(() => setHighlightedMultiIndex(null), 2000);
+      }
+
+      // resetare
       setGameName("");
       setGameMode(DEFAULT_MODE);
       setAge("");
       setGameRating("");
-      setShowForm(false); //inchidere formular
+      setShowForm(false);
     }
   };
 
@@ -159,17 +190,21 @@ export default function PCGames() {
             <div>
               {pcGamesList
                 .filter((game) => game.gameMode === "singleplayer")
+                .sort((a, b) => b.gameRating - a.gameRating)
                 .map((game, index) => (
                   <div
                     key={index}
                     style={{
-                      backgroundColor: "#4a5568",
-                      color: "white",
+                      backgroundColor:
+                        highlightedSingleIndex === index ? "yellow" : "#4a5568",
+                      color:
+                        highlightedSingleIndex === index ? "black" : "white",
                       padding: "15px",
                       borderRadius: "8px",
                       marginBottom: "10px",
                       boxShadow: "0 2px 5px rgba(0,0,0,0.3)",
                       width: "260px",
+                      transition: "background-color 0.3s ease",
                     }}
                   >
                     <p>
@@ -250,17 +285,21 @@ export default function PCGames() {
             <div>
               {pcGamesList
                 .filter((game) => game.gameMode === "multiplayer")
+                .sort((a, b) => b.gameRating - a.gameRating)
                 .map((game, index) => (
                   <div
                     key={index}
                     style={{
-                      backgroundColor: "#4a5568",
-                      color: "white",
+                      backgroundColor:
+                        highlightedMultiIndex === index ? "yellow" : "#4a5568",
+                      color:
+                        highlightedMultiIndex === index ? "black" : "white",
                       padding: "15px",
                       borderRadius: "8px",
                       marginBottom: "10px",
                       boxShadow: "0 2px 5px rgba(0,0,0,0.3)",
                       width: "260px",
+                      transition: "background-color 0.3s ease",
                     }}
                   >
                     <p>
