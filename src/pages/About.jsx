@@ -26,14 +26,18 @@ export default function About() {
       >
         <div
           style={{
-            // maxWidth: "800px",
             fontSize: "20px",
-            color: "#1f2937",
+            color: "oklch(70% 0.15 230)",
             marginBottom: "40px",
+            fontWeight: "bold",
+            marginTop: "10px",
             textAlign: "center",
+            // backgroundColor: "oklch(71.4% 0.203 305.504)",
             margin: "0 auto",
             gap: "40px",
             fontWeight: "bold",
+            padding: "8px 12px",
+            borderRadius: "8px",
             paddingBottom: "50px",
           }}
         >

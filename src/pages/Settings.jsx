@@ -22,7 +22,12 @@ export default function Settings() {
         id="fontSelect"
         value={fontFamily}
         onChange={handleChange}
-        className="border p-2 rounded"
+        className="border p-2 rounded-xl shadow-sm"
+        style={{
+          backgroundColor: "oklch(44.3% 0.11 240.79)",
+          color: "oklch(98% 0 0)",
+          borderColor: "oklch(72% 0.12 60)",
+        }}
       >
         <option value="Arial">Arial</option>
         <option value="Courier New">Courier New</option>
@@ -41,7 +46,12 @@ export default function Settings() {
         id="themeSelect"
         value={theme}
         onChange={handleThemeChange}
-        className="border p-2 rounded bg-white text-black dark:bg-black dark:text-white dark:border-gray-600"
+        className="border p-2 rounded-xl shadow-sm"
+        style={{
+          backgroundColor: "oklch(44.3% 0.11 240.79)",
+          color: "oklch(98% 0 0)",
+          borderColor: "oklch(72% 0.12 60)",
+        }}
       >
         <option value="light">Light</option>
         <option value="dark">Dark</option>

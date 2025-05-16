@@ -16,7 +16,7 @@ function App() {
     <div>
       <Font>
         <LightDark>
-          <nav>
+          <nav className="nav">
             <NavLink
               to="/about"
               className={({ isActive }) =>

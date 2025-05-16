@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Layout from "../Layout";
 
 const MIN_AGE = 3;
-const MAX_AGE = 99;
+const MAX_AGE = 18;
 const MIN_RAITING = 1;
 const MAX_RAITING = 10;
 const DEFAULT_MODE = "singleplayer";
@@ -17,6 +17,7 @@ export default function Consola() {
     age: "",
     gameRating: "",
   });
+
   const [showForm, setShowForm] = useState(false);
   const [consolaGamesList, setconsolaGamesList] = useState(() => {
     const savedGames = localStorage.getItem("consolaGamesList");

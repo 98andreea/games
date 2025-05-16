@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import Layout from "../Layout";
+import { useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 
 const MIN_AGE = 3;
-const MAX_AGE = 99;
+const MAX_AGE = 18;
 const MIN_RAITING = 1;
 const MAX_RAITING = 10;
 const DEFAULT_MODE = "singleplayer";
@@ -17,11 +19,14 @@ export default function Boardgames() {
     age: "",
     gameRating: "",
   });
+
   const [showForm, setShowForm] = useState(false);
   const [boardGamesList, setboardGamesList] = useState(() => {
     const savedGames = localStorage.getItem("boardGamesList");
     return savedGames ? JSON.parse(savedGames) : [];
   });
+
+  const [highlightedIndex, setHighlightedIndex] = useState(null);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -58,16 +63,32 @@ export default function Boardgames() {
         gameRating: Number(gameRating),
       };
 
-      const updatedList = [...boardGamesList, newGame];
+      // Adaug jocul și sortez lista după rating descrescător
+      const updatedList = [...boardGamesList, newGame].sort(
+        (a, b) => b.gameRating - a.gameRating
+      );
+
       setboardGamesList(updatedList);
       localStorage.setItem("boardGamesList", JSON.stringify(updatedList));
 
-      //resetare campuri pt joc nou
+      // CAUTĂ INDEXUL JOCULUI NOU
+      const newIndex = updatedList.findIndex(
+        (game) =>
+          game.gameName === newGame.gameName &&
+          game.age === newGame.age &&
+          game.gameRating === newGame.gameRating &&
+          game.gameMode === newGame.gameMode
+      );
+
+      setHighlightedIndex(newIndex);
+      setTimeout(() => setHighlightedIndex(null), 2000);
+
+      // resetare
       setGameName("");
       setGameMode(DEFAULT_MODE);
       setAge("");
       setGameRating("");
-      setShowForm(false); //inchidere formular
+      setShowForm(false);
     }
   };
 
@@ -158,17 +179,20 @@ export default function Boardgames() {
             <div>
               {boardGamesList
                 .filter((game) => game.gameMode === "singleplayer")
+                .sort((a, b) => b.gameRating - a.gameRating)
                 .map((game, index) => (
                   <div
                     key={index}
                     style={{
-                      backgroundColor: "#4a5568",
-                      color: "white",
+                      backgroundColor:
+                        highlightedIndex === index ? "yellow" : "#4a5568",
+                      color: highlightedIndex === index ? "black" : "white",
                       padding: "15px",
                       borderRadius: "8px",
                       marginBottom: "10px",
                       boxShadow: "0 2px 5px rgba(0,0,0,0.3)",
                       width: "260px",
+                      transition: "background-color 0.3s ease",
                     }}
                   >
                     <p>

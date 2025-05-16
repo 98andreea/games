@@ -57,3 +57,40 @@ body {
   background-color: #1a202c;
   color: white;
 }
+
+/* nav {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  padding: 1rem;
+  flex-wrap: wrap;
+} */
+
+/* pt desktop */
+/* @media (min-width: 1024px) {
+  .nav {
+    display: flex;
+    flex-direction: row;
+  }
+} */
+
+/* pt tablete */
+/* @media (min-width: 1024px) and (min-width: 768px) {
+  .nav {
+    flex-direction: column;
+  }
+} */
+
+/* /* pt telefoane  */
+/* @media (max-width: 767px) {
+  .nav {
+    flex-direction: column;
+    padding: 10px;
+    gap: 5px;
+  }
+} */
+/* 
+nav a {
+  width: 90%;
+  text-align: center;
+} */
